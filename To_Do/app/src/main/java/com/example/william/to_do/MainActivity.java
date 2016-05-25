@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity
             tarefa.setTitulo(nome);
             String descricao = data.getStringExtra("descricao");
             tarefa.setDescricao(descricao);
-            String hora = data.getStringExtra("hora");
-            tarefa.setHora(hora);
 
             tarefas.add(tarefa);
 
