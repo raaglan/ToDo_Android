@@ -3,7 +3,6 @@ package com.example.william.to_do;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnClickListener {
+
+    private ArrayList<Tarefa> tarefas = new ArrayList<>();
+    private TarefaAdapter tarefaAdapter;
+    private ListView toDoList;
+    private static final int NOVATAREFA = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +36,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent it = new Intent(view.getContext(), NovaTarefaActivity.class);
+                startActivityForResult(it, NOVATAREFA);
             }
         });
 
@@ -41,6 +49,32 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void sair(View view){
+        finish();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && requestCode == NOVATAREFA ){
+            Tarefa tarefa = new Tarefa();
+
+
+            String nome = data.getStringExtra("titulo");
+            tarefa.setTitulo(nome);
+            String descricao = data.getStringExtra("descricao");
+            tarefa.setDescricao(descricao);
+
+            tarefas.add(tarefa);
+
+            tarefaAdapter = new TarefaAdapter(this, tarefas);
+
+            toDoList.setAdapter(tarefaAdapter);
+            tarefaAdapter.notifyDataSetChanged();
+
+        }
     }
 
     @Override
@@ -81,22 +115,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_todo) {
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_done) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_notes){
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_info) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
