@@ -15,77 +15,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-     <LinearLayout
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
-        <EditText
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTitulo"
-            android:text="Título"
-            android:layout_weight="0.44" />
+            android:layout_height="match_parent">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTitulo"
+                android:text="Título"
+                android:layout_weight="0.44" />
 
-         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Prioridade"
-            android:id="@+id/textViewPrioridade" />
+            <EditText
+                android:layout_width="352dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editDescricao"
+                android:text="Descrição" />
 
-         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="58dp">
-
-            <CheckBox
+            <TimePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alta"
-                android:id="@+id/prioridadeAlta"
-                android:checked="false" />
+                android:id="@+id/timePicker"
+                android:layout_weight="0.44" />
 
-            <CheckBox
+            <DatePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Média"
-                android:id="@+id/prioridadeMedia"
-                android:checked="false" />
+                android:id="@+id/datePicker" />
 
-            <CheckBox
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Baixa"
-                android:id="@+id/prioridadeBaixa"
-                android:checked="false" />
+                android:text="OK"
+                android:id="@+id/buttonOK"
+                android:layout_gravity="right"
+                android:backgroundTint="#01c0fa"
+                android:backgroundTintMode="screen" />
+
         </LinearLayout>
-
-         <TimePicker
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/timePicker"
-             android:layout_weight="0.44" />
-
-         <DatePicker
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/calendarView" />
-
-         <EditText
-            android:layout_width="352dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editAnotacoes"
-            android:text="Anotações" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OK"
-            android:id="@+id/buttonOK"
-            android:layout_gravity="right"
-            android:backgroundTint="#01c0fa"
-            android:backgroundTintMode="screen" />
-
-     </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
