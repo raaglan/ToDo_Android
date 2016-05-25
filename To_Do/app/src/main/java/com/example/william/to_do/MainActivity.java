@@ -18,7 +18,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private ArrayList<Tarefa> tarefas = new ArrayList<>();
     private TarefaAdapter tarefaAdapter;
@@ -49,7 +49,20 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        toDoList = (ListView) findViewById(R.id.lvToDo);
+        toDoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+        ArrayList<Tarefa> tarefas = new ArrayList<>();
+
+        toDoList.setAdapter(new TarefaAdapter(this, tarefas));
     }
+
 
     public void sair(View view){
         finish();
@@ -66,6 +79,8 @@ public class MainActivity extends AppCompatActivity
             tarefa.setTitulo(nome);
             String descricao = data.getStringExtra("descricao");
             tarefa.setDescricao(descricao);
+            String hora = data.getStringExtra("hora");
+            tarefa.setHora(hora);
 
             tarefas.add(tarefa);
 
@@ -130,8 +145,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }

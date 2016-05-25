@@ -11,7 +11,7 @@ public class Tarefa {
     private String titulo;
     private String descricao;
     private Date data;
-    private Timer hora;
+    private String hora;
 
     public String getTitulo() {
         return titulo;
@@ -37,11 +37,11 @@ public class Tarefa {
         this.data = data;
     }
 
-    public Timer getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Timer hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 }
