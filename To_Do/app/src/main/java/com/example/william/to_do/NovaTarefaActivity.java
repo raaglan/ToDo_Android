@@ -1,3 +1,4 @@
+
 package com.example.william.to_do;
 
 import android.support.v7.app.AppCompatActivity;
@@ -70,4 +71,3 @@ public class NovaTarefaActivity extends AppCompatActivity {
     }
 
 }
-
