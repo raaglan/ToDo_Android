@@ -10,7 +10,7 @@ public class Tarefa {
 
     private String titulo;
     private String descricao;
-    private Date data;
+    private String data;
     private String hora;
 
     public String getTitulo() {
@@ -29,11 +29,11 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

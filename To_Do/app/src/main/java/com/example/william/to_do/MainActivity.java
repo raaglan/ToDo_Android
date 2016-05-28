@@ -63,22 +63,23 @@ public class MainActivity extends AppCompatActivity
         toDoList.setAdapter(new TarefaAdapter(this, tarefas));
     }
 
-
-    public void sair(View view){
-        finish();
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK && requestCode == NOVATAREFA ){
             Tarefa tarefa = new Tarefa();
 
-
             String nome = data.getStringExtra("titulo");
             tarefa.setTitulo(nome);
+
             String descricao = data.getStringExtra("descricao");
             tarefa.setDescricao(descricao);
+
+            String hora = data.getStringExtra("hora");
+            tarefa.setHora(hora);
+
+            String date = data.getStringExtra("data");
+            tarefa.setData(date);
 
             tarefas.add(tarefa);
 
@@ -142,6 +143,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 }

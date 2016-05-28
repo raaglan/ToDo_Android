@@ -1,8 +1,9 @@
-
 package com.example.william.to_do;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -10,64 +11,92 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 /**
- * Created by raglan on 25/05/2016.
+ * Created by willi on 25/05/2016.
  */
+    public class NovaTarefaActivity extends AppCompatActivity {
 
-public class NovaTarefaActivity extends AppCompatActivity {
-
-    private TextView titulo;
-    private TextView descricao;
-    private DatePicker data;
-    private TimePicker hora;
-    private Button buttonOK;
-
+    private TextView edtTitulo;
+    private TextView edtDescricao;
+    private TextView tvHora;
+    private TextView tvData;
+    private Button btnOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_tarefa);
 
+        final Tarefa tarefa = new Tarefa();
 
-
-        titulo = (TextView)findViewById(R.id.editTitulo);
-        titulo.setOnClickListener(new View.OnClickListener() {
+        edtTitulo = (TextView) findViewById(R.id.editTitulo);
+        edtTitulo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                edtTitulo.setText("");
+                tarefa.setTitulo(edtTitulo.getText().toString());
+            }
+        });
+
+        edtDescricao = (TextView) findViewById(R.id.editDescricao);
+        edtDescricao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtDescricao.setText("");
+                tarefa.setDescricao(edtDescricao.getText().toString());
+            }
+        });
+
+        btnOk = (Button) findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent();
+
+                String titulo = edtTitulo.getText().toString();
+                String descricao = edtDescricao.getText().toString();
+                String hora = tvHora.getText().toString();
+                String data = tvData.getText().toString();
+
+                it.putExtra("titulo", titulo);
+                it.putExtra("descricao", descricao);
+                it.putExtra("hora", hora);
+                it.putExtra("data", data);
+
+                setResult(RESULT_OK, it);
+
+                finish();
+            }
+        });
+
+        tvHora = (TextView) findViewById(R.id.tvHora);
+        tvHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new TimePickerFragment();
+                newFragment.show(getFragmentManager(),"TimePicker");
+                tarefa.setHora(tvHora.getText().toString());
 
             }
         });
 
-        descricao = (TextView)findViewById(R.id.editDescricao);
-        descricao.setOnClickListener(new View.OnClickListener() {
+        tvData = (TextView) findViewById(R.id.tvData);
+        tvData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-            }
-        });
-
-        data = (DatePicker)findViewById(R.id.datePicker);
-        data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        hora = (TimePicker)findViewById(R.id.timePicker);
-        hora.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        buttonOK = (Button)findViewById(R.id.buttonOK);
-        buttonOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "DatePicker");
+                tarefa.setData(tvData.getText().toString());
             }
         });
     }
-
 }
+
+
+
+
+
+
+
+
+
+

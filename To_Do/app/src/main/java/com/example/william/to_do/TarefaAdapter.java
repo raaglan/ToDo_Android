@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 
@@ -51,11 +52,14 @@ public class TarefaAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.custom_layout, null);
             itemHolder = new ItemSuporte();
 
-            itemHolder.txtTitulo = (TextView) convertView.findViewById(R.id.t1);
-            itemHolder.txtDescricao = (TextView) convertView.findViewById(R.id.t2);
+            itemHolder.txtTitulo = (TextView) convertView.findViewById(R.id.txtTitulo);
+            itemHolder.txtDescricao = (TextView) convertView.findViewById(R.id.txtDescricao);
+            itemHolder.txtHora = (TextView) convertView.findViewById(R.id.txtHora);
 
             itemHolder.txtTitulo.setText(tarefa.getTitulo());
             itemHolder.txtDescricao.setText(tarefa.getDescricao());
+            itemHolder.txtHora.setText(tarefa.getData() + " às "+ tarefa.getHora());
+
         }
         else{
             itemHolder = (ItemSuporte) convertView.getTag();
@@ -70,5 +74,8 @@ public class TarefaAdapter extends BaseAdapter {
     private static class ItemSuporte{
         TextView txtTitulo;
         TextView txtDescricao;
+        TextView txtHora;
     }
+
+
 }
