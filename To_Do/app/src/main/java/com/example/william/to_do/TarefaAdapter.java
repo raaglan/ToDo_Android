@@ -1,14 +1,20 @@
 package com.example.william.to_do;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by willi on 20/05/2016.
@@ -44,7 +50,7 @@ public class TarefaAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ItemSuporte itemHolder;
+        final ItemSuporte itemHolder;
         Tarefa tarefa = lista.get(position);
 
         if(convertView == null){
@@ -76,6 +82,7 @@ public class TarefaAdapter extends BaseAdapter {
         TextView txtDescricao;
         TextView txtHora;
     }
+
 
 
 }

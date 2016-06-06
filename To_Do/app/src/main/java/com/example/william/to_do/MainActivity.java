@@ -1,8 +1,20 @@
 package com.example.william.to_do;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +25,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -24,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     private TarefaAdapter tarefaAdapter;
     private ListView toDoList;
     private static final int NOVATAREFA = 1;
+    private static MainActivity instance;
+    private Tarefa tarefa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +51,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        instance = this;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +59,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent it = new Intent(view.getContext(), NovaTarefaActivity.class);
                 startActivityForResult(it, NOVATAREFA);
+
             }
         });
 
@@ -54,39 +76,69 @@ public class MainActivity extends AppCompatActivity
         toDoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Tarefa t = (Tarefa) parent.getAdapter().getItem(position);
+                gerarNotificacao(view.getContext(), new Intent(view.getContext(), MainActivity.class), t);
 
             }
         });
 
-        ArrayList<Tarefa> tarefas = new ArrayList<>();
+        //lança a notificação automatica, quando a classe BroadCast nao estiver comentada.
+        //Mas terá que ser feita uma comparação com as datas das tarefas cadastradas com a hora do sistema
+        //para poder lançar a notificaçao. Do jeito que está ele lança após um determinado tempo sem buscar nenhum dado da tarefa
+        Intent intent = new Intent("ALARME_DISPARADO");
+        PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
 
-        toDoList.setAdapter(new TarefaAdapter(this, tarefas));
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(System.currentTimeMillis());
+        c.add(Calendar.SECOND, 3);
+
+        AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarme.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), p);
+
+    }
+
+    public static MainActivity getInstance(){
+        return instance;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+
+        Intent intent = new Intent("ALARME_DISPARADO");
+        PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarme.cancel(p);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK && requestCode == NOVATAREFA ){
-            Tarefa tarefa = new Tarefa();
+            Tarefa t = new Tarefa();
+            this.tarefa = t;
 
             String nome = data.getStringExtra("titulo");
-            tarefa.setTitulo(nome);
+            t.setTitulo(nome);
 
             String descricao = data.getStringExtra("descricao");
-            tarefa.setDescricao(descricao);
+            t.setDescricao(descricao);
 
             String hora = data.getStringExtra("hora");
-            tarefa.setHora(hora);
+            t.setHora(hora);
 
             String date = data.getStringExtra("data");
-            tarefa.setData(date);
+            t.setData(date);
 
-            tarefas.add(tarefa);
+            tarefas.add(t);
 
             tarefaAdapter = new TarefaAdapter(this, tarefas);
 
             toDoList.setAdapter(tarefaAdapter);
             tarefaAdapter.notifyDataSetChanged();
+
+
 
         }
     }
@@ -101,27 +153,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -143,6 +174,51 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void gerarNotificacao(Context context, Intent intent, Tarefa t) {
+
+        TextView tv = (TextView) findViewById(R.id.txtTitulo);
+        TextView tv2 = (TextView) findViewById(R.id.txtDescricao);
+        String titulo = tv.getText().toString();
+        String descricao = tv2.getText().toString();
+        t.setTitulo(titulo);
+        t.setDescricao(descricao);
+
+        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        PendingIntent p = PendingIntent.getActivity(context, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setTicker("Voce tem uma tarefa agendada para hoje!");
+        builder.setContentTitle(t.getTitulo());
+        builder.setContentText(t.getDescricao());
+        builder.setSmallIcon(R.drawable.ic_not_small);
+        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_assignment_late_red_24dp));
+        builder.setContentIntent(p);
+
+        Notification n = builder.build();
+        n.vibrate = new long[]{150, 300, 150, 600};
+        n.flags = Notification.FLAG_AUTO_CANCEL;
+        nm.notify(R.drawable.ic_not_small, n);
+
+
+        try {
+            Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            MediaPlayer mp = MediaPlayer.create(context, som);
+            mp.start();
+        } catch (Exception e) {
+        }
+
+        Toast toast = Toast.makeText(this, "Clicou em " + titulo, Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
+    //esse método terá q fazer a mesma comparacao de horas entre as tarefas e o sistema, e
+    //após encontrar uma tarefa com a hora igual irá retornar a respectiva tarefa, que será
+    //usado também no BroadCastReceiver, para lançar a notifcação sem precisar o app está aberto.
+    public Tarefa getTarefa(){
+        return tarefa;
+    }
+
 
 
 

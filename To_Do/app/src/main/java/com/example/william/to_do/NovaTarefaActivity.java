@@ -1,14 +1,21 @@
 package com.example.william.to_do;
 
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 /**
  * Created by willi on 25/05/2016.
@@ -20,13 +27,14 @@ import android.widget.TimePicker;
     private TextView tvHora;
     private TextView tvData;
     private Button btnOk;
+    final Tarefa tarefa = new Tarefa();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_tarefa);
 
-        final Tarefa tarefa = new Tarefa();
+
 
         edtTitulo = (TextView) findViewById(R.id.editTitulo);
         edtTitulo.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +96,11 @@ import android.widget.TimePicker;
                 tarefa.setData(tvData.getText().toString());
             }
         });
+
+
     }
+
+
 }
 
 
