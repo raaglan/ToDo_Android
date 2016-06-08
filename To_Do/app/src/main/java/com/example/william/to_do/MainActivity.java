@@ -177,10 +177,11 @@ public class MainActivity extends AppCompatActivity
 
     public void gerarNotificacao(Context context, Intent intent, Tarefa t) {
 
-        TextView tv = (TextView) findViewById(R.id.txtTitulo);
-        TextView tv2 = (TextView) findViewById(R.id.txtDescricao);
-        String titulo = tv.getText().toString();
-        String descricao = tv2.getText().toString();
+        Toast toast2 = Toast.makeText(this, "Clicou em " + t.getDescricao(), Toast.LENGTH_SHORT);
+        toast2.show();
+
+        String titulo = t.getTitulo();
+        String descricao = t.getDescricao();
         t.setTitulo(titulo);
         t.setDescricao(descricao);
 
