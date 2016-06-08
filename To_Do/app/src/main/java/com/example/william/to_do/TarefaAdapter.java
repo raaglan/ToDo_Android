@@ -1,20 +1,16 @@
 package com.example.william.to_do;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
+import android.support.v4.view.GestureDetectorCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by willi on 20/05/2016.
@@ -24,6 +20,7 @@ public class TarefaAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
     private ArrayList<Tarefa> lista;
+
 
 
     public TarefaAdapter(Context context, ArrayList<Tarefa> lista){
@@ -61,15 +58,30 @@ public class TarefaAdapter extends BaseAdapter {
             itemHolder.txtTitulo = (TextView) convertView.findViewById(R.id.txtTitulo);
             itemHolder.txtDescricao = (TextView) convertView.findViewById(R.id.txtDescricao);
             itemHolder.txtHora = (TextView) convertView.findViewById(R.id.txtHora);
+            itemHolder.container = (RelativeLayout) convertView.findViewById(R.id.container);
+
+            itemHolder.mDetector = new GestureDetectorCompat(context,
+                    new MyGestureListener(context, convertView));
+            convertView.setTag(itemHolder);
 
             itemHolder.txtTitulo.setText(tarefa.getTitulo());
             itemHolder.txtDescricao.setText(tarefa.getDescricao());
             itemHolder.txtHora.setText(tarefa.getData() + " às "+ tarefa.getHora());
 
+
         }
         else{
             itemHolder = (ItemSuporte) convertView.getTag();
         }
+        final ItemSuporte holder = (ItemSuporte) convertView.getTag();
+        itemHolder.container.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                itemHolder.mDetector.onTouchEvent(event);
+                return true;
+            }
+        });
         return convertView;
     }
 
@@ -81,6 +93,8 @@ public class TarefaAdapter extends BaseAdapter {
         TextView txtTitulo;
         TextView txtDescricao;
         TextView txtHora;
+        GestureDetectorCompat mDetector;
+        RelativeLayout container;
     }
 
 
