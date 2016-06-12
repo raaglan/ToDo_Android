@@ -175,6 +175,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public void replaceFragment(){}
+    
+
     public void gerarNotificacao(Context context, Intent intent, Tarefa t) {
 
         Toast toast2 = Toast.makeText(this, "Clicou em " + t.getDescricao(), Toast.LENGTH_SHORT);
