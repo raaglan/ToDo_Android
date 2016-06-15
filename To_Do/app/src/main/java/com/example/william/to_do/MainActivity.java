@@ -8,42 +8,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.NotificationCompat;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.Button;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
-
-    private ArrayList<Tarefa> tarefas = new ArrayList<>();
-    private TarefaAdapter tarefaAdapter;
-    private ListView toDoList;
-    private static final int NOVATAREFA = 1;
+        implements NavigationView.OnNavigationItemSelectedListener
+{
     private static MainActivity instance;
     private Tarefa tarefa;
+    private boolean viewIsAtHome;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +48,17 @@ public class MainActivity extends AppCompatActivity
         instance = this;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(view.getContext(), NovaTarefaActivity.class);
-                startActivityForResult(it, NOVATAREFA);
+                startActivity(it);
 
             }
         });
+
+        displayView(R.id.nav_todo);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,15 +69,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        toDoList = (ListView) findViewById(R.id.lvToDo);
-        toDoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Tarefa t = (Tarefa) parent.getAdapter().getItem(position);
-                gerarNotificacao(view.getContext(), new Intent(view.getContext(), MainActivity.class), t);
-
-            }
-        });
+//        toDoList = (ListView) findViewById(R.id.lvToDo);
+//        toDoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Tarefa t = (Tarefa) parent.getAdapter().getItem(position);
+//                gerarNotificacao(view.getContext(), new Intent(view.getContext(), MainActivity.class), t);
+//
+//            }
+//        });
 
         //lança a notificação automatica, quando a classe BroadCast nao estiver comentada.
         //Mas terá que ser feita uma comparação com as datas das tarefas cadastradas com a hora do sistema
@@ -94,6 +91,7 @@ public class MainActivity extends AppCompatActivity
 
         AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarme.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), p);
+
 
     }
 
@@ -112,44 +110,17 @@ public class MainActivity extends AppCompatActivity
         alarme.cancel(p);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK && requestCode == NOVATAREFA ){
-            Tarefa t = new Tarefa();
-            this.tarefa = t;
-
-            String nome = data.getStringExtra("titulo");
-            t.setTitulo(nome);
-
-            String descricao = data.getStringExtra("descricao");
-            t.setDescricao(descricao);
-
-            String hora = data.getStringExtra("hora");
-            t.setHora(hora);
-
-            String date = data.getStringExtra("data");
-            t.setData(date);
-
-            tarefas.add(t);
-
-            tarefaAdapter = new TarefaAdapter(this, tarefas);
-
-            toDoList.setAdapter(tarefaAdapter);
-            tarefaAdapter.notifyDataSetChanged();
-
-
-
-        }
-    }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }
+        if(!viewIsAtHome){
+            displayView(R.id.nav_todo);
+        }else {
+            moveTaskToBack(true);
         }
     }
 
@@ -157,31 +128,50 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        displayView(item.getItemId());
+        return true;
+    }
 
-        if (id == R.id.nav_todo) {
+    public void displayView(int viewId) {
 
-        } else if (id == R.id.nav_done) {
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
 
-        } else if (id == R.id.nav_notes){
+        switch (viewId) {
+            case R.id.nav_todo:
+                fragment = new FragmentToDo();
+                title  = "To Do";
+                viewIsAtHome = true;
+                break;
+            case R.id.nav_done:
+                fragment = new FragmentDone();
+                title = "Done";
+                viewIsAtHome = false;
+                break;
 
-        } else if (id == R.id.nav_info) {
+        }
 
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragments_layout, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+
     }
 
-    public void replaceFragment(){}
-    
+
+
+
 
     public void gerarNotificacao(Context context, Intent intent, Tarefa t) {
-
-        Toast toast2 = Toast.makeText(this, "Clicou em " + t.getDescricao(), Toast.LENGTH_SHORT);
-        toast2.show();
 
         String titulo = t.getTitulo();
         String descricao = t.getDescricao();
@@ -204,7 +194,6 @@ public class MainActivity extends AppCompatActivity
         n.flags = Notification.FLAG_AUTO_CANCEL;
         nm.notify(R.drawable.ic_not_small, n);
 
-
         try {
             Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             MediaPlayer mp = MediaPlayer.create(context, som);
@@ -220,6 +209,7 @@ public class MainActivity extends AppCompatActivity
     //após encontrar uma tarefa com a hora igual irá retornar a respectiva tarefa, que será
     //usado também no BroadCastReceiver, para lançar a notifcação sem precisar o app está aberto.
     public Tarefa getTarefa(){
+
         return tarefa;
     }
 
