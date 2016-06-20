@@ -10,7 +10,8 @@
     tools:context="com.example.william.to_do.NovaTarefaActivity"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#978080">
+    android:background="#ffffff">
+
 
 
     <EditText
@@ -18,14 +19,16 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:id="@+id/editTitulo"
-        android:text="Título" />
+        android:text="Título"
+        android:theme="@style/MyEditText"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:id="@+id/editDescricao"
-        android:text="Descrição" />
+        android:text="Descrição"
+        android:theme="@style/MyEditText"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,7 +46,8 @@
             android:textSize="30dp"
             android:layout_alignTop="@+id/tvData"
             android:layout_toStartOf="@+id/tvData"
-            android:layout_marginEnd="51dp" />
+            android:layout_marginEnd="51dp"
+            android:theme="@style/MyEditText"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +58,9 @@
             android:textSize="30dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="64dp" />
+            android:layout_marginEnd="64dp"
+            android:theme="@style/MyEditText"/>
+
 
     </RelativeLayout>
 
@@ -65,6 +71,7 @@
         android:id="@+id/btnOk"
         android:layout_gravity="right"
         android:background="#f424292a"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:theme="@style/MyEditText"/>
 
 </LinearLayout>

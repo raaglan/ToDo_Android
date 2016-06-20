@@ -21,7 +21,7 @@ import android.widget.TextView;
 /**
  * Created by willi on 25/05/2016.
  */
-    public class NovaTarefaActivity extends Activity {
+    public class NovaTarefaActivity extends AppCompatActivity {
 
     private TextView edtTitulo;
     private TextView edtDescricao;
