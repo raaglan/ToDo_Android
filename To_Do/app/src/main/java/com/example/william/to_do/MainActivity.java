@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity
         builder.setContentTitle(t.getTitulo());
         builder.setContentText(t.getDescricao());
         builder.setSmallIcon(R.drawable.ic_not_small);
-        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_assignment_late_red_24dp));
+        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo));
         builder.setContentIntent(p);
 
         Notification n = builder.build();

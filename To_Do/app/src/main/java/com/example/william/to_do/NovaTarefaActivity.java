@@ -1,5 +1,6 @@
 package com.example.william.to_do;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 /**
  * Created by willi on 25/05/2016.
  */
-    public class NovaTarefaActivity extends AppCompatActivity {
+    public class NovaTarefaActivity extends Activity {
 
     private TextView edtTitulo;
     private TextView edtDescricao;

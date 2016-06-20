@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_todo"
             android:icon="@drawable/ic_to_do"
-            android:title="To Do" />
+            android:title="To Do"/>
         <item
             android:id="@+id/nav_done"
             android:icon="@drawable/ic_done"
-            android:title="Done" />
+            android:title="Done"  android:theme="@style/AppTheme.Dark"/>
         <item
-            android:id="@+id/nav_notes"
-            android:icon="@drawable/ic_notes"
-            android:title="Notes" />
-
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_info"
+            android:title="About"
+            />
     </group>
-
-    <item android:title="Raglan, Tayrone, William">
-        <menu>
-            <item
-                android:id="@+id/nav_info"
-                android:icon="@drawable/ic_info"
-                android:title="UniFacisa SI"
-                />
-
-
-        </menu>
-    </item>
-
 </menu>

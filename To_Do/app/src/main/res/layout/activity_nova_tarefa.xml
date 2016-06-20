@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.william.to_do.NovaTarefaActivity"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#978080">
 
 
     <EditText
@@ -63,7 +64,7 @@
         android:text="Ok"
         android:id="@+id/btnOk"
         android:layout_gravity="right"
-        android:background="#f43fdbfa"
+        android:background="#f424292a"
         android:layout_marginTop="10dp" />
 
 </LinearLayout>
