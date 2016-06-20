@@ -7,8 +7,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,6 +61,26 @@ public class TarefaAdapter extends BaseAdapter {
             itemHolder.txtDescricao = (TextView) convertView.findViewById(R.id.txtDescricao);
             itemHolder.txtHora = (TextView) convertView.findViewById(R.id.txtHora);
             itemHolder.container = (RelativeLayout) convertView.findViewById(R.id.container);
+            itemHolder.btnDone = (ImageButton) convertView.findViewById(R.id.btnDone);
+            itemHolder.btnDelete = (ImageButton) convertView.findViewById(R.id.btnDelete);
+
+            itemHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemHolder.btnDelete.setImageResource(R.drawable.btn_delete);
+                    Toast t = Toast.makeText(context, "Click Delete", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            });
+
+            itemHolder.btnDone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemHolder.btnDone.setImageResource(R.drawable.btn_done);
+                    Toast t = Toast.makeText(context, "Click Done", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            });
 
             itemHolder.mDetector = new GestureDetectorCompat(context,
                     new MyGestureListener(context, convertView));
@@ -79,6 +101,7 @@ public class TarefaAdapter extends BaseAdapter {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 itemHolder.mDetector.onTouchEvent(event);
+
                 return true;
             }
         });
@@ -95,7 +118,11 @@ public class TarefaAdapter extends BaseAdapter {
         TextView txtHora;
         GestureDetectorCompat mDetector;
         RelativeLayout container;
+        ImageButton btnDone;
+        ImageButton btnDelete;
     }
+
+
 
 
 

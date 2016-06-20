@@ -26,37 +26,37 @@ public class FragmentToDo extends Fragment {
         toDoList = (ListView) view.findViewById(R.id.lvToDo);
 
         Bundle bundle = getArguments();
-//        Tarefa tarefa = new Tarefa();
-//        if (bundle != null) {
-//
-//            String nome = getArguments().getString("titulo");
-//            tarefa.setTitulo(nome);
-//
-//            String descricao = it.getStringExtra("descricao");
-//            tarefa.setDescricao(descricao);
-//
-//            String hora = it.getStringExtra("hora");
-//            tarefa.setHora(hora);
-//
-//            String date = it.getStringExtra("data");
-//            tarefa.setData(date);
-//
-//            tarefas.add(tarefa);
-//
-//            tarefaAdapter = new TarefaAdapter(getContext(), tarefas);
-//
-//            toDoList.setAdapter(tarefaAdapter);
-//            tarefaAdapter.notifyDataSetChanged();
-//        }else{
-//            tarefa.setTitulo("taaaaaaa");
-//
-//            tarefas.add(tarefa);
-//
-//            tarefaAdapter = new TarefaAdapter(getContext(), tarefas);
-//
-//            toDoList.setAdapter(tarefaAdapter);
-//            tarefaAdapter.notifyDataSetChanged();
-//        }
+        Tarefa tarefa = new Tarefa();
+        if (bundle != null) {
+
+            String nome = getArguments().getString("titulo");
+            tarefa.setTitulo(nome);
+
+            String descricao = bundle.getString("descricao");
+            tarefa.setDescricao(descricao);
+
+            String hora = bundle.getString("hora");
+            tarefa.setHora(hora);
+
+            String date = bundle.getString("data");
+            tarefa.setData(date);
+
+            tarefas.add(tarefa);
+
+            tarefaAdapter = new TarefaAdapter(getContext(), tarefas);
+
+            toDoList.setAdapter(tarefaAdapter);
+            tarefaAdapter.notifyDataSetChanged();
+        }else{
+            tarefa.setTitulo("taaaaaaa");
+
+            tarefas.add(tarefa);
+
+            tarefaAdapter = new TarefaAdapter(getContext(), tarefas);
+
+            toDoList.setAdapter(tarefaAdapter);
+            tarefaAdapter.notifyDataSetChanged();
+        }
         return view;
     }
 
