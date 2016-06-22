@@ -10,8 +10,7 @@
     tools:context="com.example.william.to_do.NovaTarefaActivity"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#ffffff">
-
+    android:background="#989090">
 
 
     <EditText
@@ -70,8 +69,8 @@
         android:text="Ok"
         android:id="@+id/btnOk"
         android:layout_gravity="right"
-        android:background="#f424292a"
+        android:background="#ff0008"
         android:layout_marginTop="10dp"
-        android:theme="@style/MyEditText"/>
+        android:theme="@style/AppTheme"/>
 
 </LinearLayout>

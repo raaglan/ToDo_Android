@@ -29,13 +29,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add" />
+        android:src="@drawable/ic_add"
+        app:backgroundTint="#ff0101" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragments_layout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/paginacadernodisplay"
+        android:gravity="left">
 
         <fragment
             android:id="@+id/todoFragment"
