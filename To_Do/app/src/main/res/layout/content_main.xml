@@ -18,13 +18,6 @@
         android:id="@+id/fragments_layout"
         android:orientation="vertical">
 
-        <fragment
-            android:id="@+id/todoFragment"
-            android:layout_marginTop="55dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.example.william.to_do.FragmentToDo"
-            tools:layout="@layout/fragment_todo" />
     </LinearLayout>
 
     </RelativeLayout>

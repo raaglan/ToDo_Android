@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragments_layout, fragment);
-            ft.addToBackStack(null);
             ft.commit();
         }
 
