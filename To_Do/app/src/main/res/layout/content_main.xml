@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_marginTop="254dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.william.to_do.MainActivity"
     android:background="#978080">
@@ -16,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragments_layout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true">
 
     </LinearLayout>
 

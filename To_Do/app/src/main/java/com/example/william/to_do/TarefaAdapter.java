@@ -25,9 +25,9 @@ public class TarefaAdapter extends BaseAdapter {
 
 
 
-    public TarefaAdapter(Context context, ArrayList<Tarefa> lista){
+    public TarefaAdapter(Context context,ArrayList<Tarefa> tarefas){
         this.context = context;
-        this.lista = lista;
+        this.lista = tarefas;
         mInflater = LayoutInflater.from(context);
     }
 

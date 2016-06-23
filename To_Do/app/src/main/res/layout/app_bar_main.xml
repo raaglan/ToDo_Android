@@ -37,7 +37,6 @@
         android:layout_height="match_parent"
         android:id="@+id/fragments_layout"
         android:orientation="vertical"
-        android:background="@drawable/paginacadernodisplay"
         android:gravity="left">
 
     </LinearLayout>

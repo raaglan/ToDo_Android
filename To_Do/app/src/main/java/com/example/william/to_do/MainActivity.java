@@ -26,6 +26,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
