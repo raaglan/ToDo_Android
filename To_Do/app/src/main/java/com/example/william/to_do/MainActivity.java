@@ -157,6 +157,11 @@ public class MainActivity extends AppCompatActivity
                 title = "Done";
                 viewIsAtHome = false;
                 break;
+            case R.id.nav_logout:
+                viewIsAtHome = false;
+                Intent it = new Intent(this, LoginActivity.class);
+                startActivity(it);
+                break;
 
         }
 
