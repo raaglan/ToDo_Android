@@ -17,7 +17,7 @@ import java.util.List;
 public class FirebaseUtil {
 
     // FIREBASE
-    public static final String FIREBASE_REPO = "todofirebase-65f3a";
+    public static final String FIREBASE_REPO = "todoandroid-b7830";
     public static final String FIREBASE_URL = "https://" + FIREBASE_REPO + ".firebaseio.com";
     private Firebase firebase;
     private StringBuffer sb;

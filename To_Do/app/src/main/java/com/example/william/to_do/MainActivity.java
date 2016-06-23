@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
-{
+        implements NavigationView.OnNavigationItemSelectedListener {
+
     private static MainActivity instance;
     private Tarefa tarefa;
     private boolean viewIsAtHome;
