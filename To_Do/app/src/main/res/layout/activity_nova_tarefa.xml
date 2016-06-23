@@ -10,7 +10,7 @@
     tools:context="com.example.william.to_do.NovaTarefaActivity"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#989090">
+    android:background="@color/background">
 
 
     <EditText
@@ -69,7 +69,7 @@
         android:text="Ok"
         android:id="@+id/btnOk"
         android:layout_gravity="right"
-        android:background="#ff0008"
+        android:background="@color/primary"
         android:layout_marginTop="10dp"
         android:theme="@style/AppTheme"/>
 

@@ -162,6 +162,11 @@ public class MainActivity extends AppCompatActivity
                 Intent it = new Intent(this, LoginActivity.class);
                 startActivity(it);
                 break;
+            case R.id.nav_info:
+                fragment = new FragmentSobre();
+                title = "Sobre";
+                viewIsAtHome = false;
+                break;
 
         }
 

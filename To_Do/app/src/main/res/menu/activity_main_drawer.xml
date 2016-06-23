@@ -13,11 +13,12 @@
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_info"
-            android:title="About"/>
+            android:title="Sobre"/>
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_done"
             android:title="Sair"  android:theme="@style/AppTheme.Dark"/>
             />
+
     </group>
 </menu>
