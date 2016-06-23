@@ -14,11 +14,10 @@
     android:background="#978080">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/fragments_layout"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true">
+        android:orientation="vertical">
 
     </LinearLayout>
 
