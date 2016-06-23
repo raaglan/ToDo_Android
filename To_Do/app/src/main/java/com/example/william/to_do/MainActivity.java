@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         instance = this;
 
+        Firebase.setAndroidContext(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +143,12 @@ public class MainActivity extends AppCompatActivity
         switch (viewId) {
             case R.id.nav_todo:
                 fragment = new FragmentToDo();
+                FirebaseUtil fb = new FirebaseUtil();
+                fb.iniciarFirebase();
+                ArrayList<Tarefa> minhasTarefas = fb.obterListagemTarefas();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("listaTarefas", minhasTarefas);
+                fragment.setArguments(bundle);
                 title  = "To Do";
                 viewIsAtHome = true;
                 break;
