@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/primary">
+    android:background="@color/background">
 
     <LinearLayout
         android:orientation="vertical"
@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
+                android:textColor="@color/primary"
                 android:hint="Name" />
         </android.support.design.widget.TextInputLayout>
 
@@ -43,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:textColor="@color/primary"
                 android:hint="Email" />
         </android.support.design.widget.TextInputLayout>
 
@@ -56,7 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password"/>
+                android:textColor="@color/primary"
+                android:hint="Senha"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->
@@ -67,14 +70,14 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:background="@color/accent"
             android:text="Create Account"/>
 
         <TextView android:id="@+id/link_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Não possui uma conta? Clique aqui!"
+            android:textColor="@color/primary"
+            android:text="Já possui conta? Clique aqui"
             android:gravity="center"
             android:textSize="16dip"/>
 
