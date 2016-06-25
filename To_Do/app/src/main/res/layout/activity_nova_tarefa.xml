@@ -18,20 +18,16 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:id="@+id/editTitulo"
-        android:inputType="textCapWords"
         android:textColor="@color/primary"
-        android:hint="Titulo"
-        android:text="Titulo"/>
+        android:hint="Titulo"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:id="@+id/editDescricao"
-        android:inputType="textCapWords"
         android:textColor="@color/primary"
-        android:hint="Descrição"
-        android:text="Descrição"/>
+        android:hint="Descrição"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/background">
+    android:background="@drawable/background_book">
 
     <LinearLayout
         android:orientation="vertical"
@@ -11,9 +11,11 @@
         android:layout_height="wrap_content"
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp"
+        android:weightSum="1">
 
-        <ImageView android:src="@drawable/logo"
+        <ImageView
+            android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
@@ -22,32 +24,36 @@
         <!-- Email Label -->
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_weight="0.10">
 
             <EditText android:id="@+id/input_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/primary"
-                android:hint="Email" />
+                android:textColor="@color/colorAccent"
+                android:hint="Email"
+                android:background="@drawable/group_top"/>
+
 
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:inputType="textPassword"
-                android:textColor="@color/primary"
-                android:hint="Senha"/>
+                android:textColor="@color/accent"
+                android:hint="Senha"
+                android:background="@drawable/group_top"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -64,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:textColor="@color/primary"
+            android:textStyle="bold"
             android:text="Não possui uma conta? Clique aqui"
             android:gravity="center"
             android:textSize="16dip"/>

@@ -10,15 +10,16 @@
             android:id="@+id/nav_done"
             android:icon="@drawable/ic_done"
             android:title="Done"  android:theme="@style/AppTheme.Dark"/>
+
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_info"
             android:title="Sobre"/>
         <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_done"
-            android:title="Sair"  android:theme="@style/AppTheme.Dark"/>
-            />
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/clobuton"
+        android:title="Sair"  android:theme="@style/AppTheme.Dark"/>
+
 
     </group>
 </menu>
