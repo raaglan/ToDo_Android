@@ -32,10 +32,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+{
 
-    private static MainActivity instance;
-    private Tarefa tarefa;
     private boolean viewIsAtHome;
 
 
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        instance = this;
 
         Firebase.setAndroidContext(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -98,9 +96,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public static MainActivity getInstance(){
-        return instance;
-    }
 
     @Override
     public void onDestroy(){
@@ -204,7 +199,7 @@ public class MainActivity extends AppCompatActivity
         builder.setContentTitle(t.getTitulo());
         builder.setContentText(t.getDescricao());
         builder.setSmallIcon(R.drawable.ic_not_small);
-        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo));
+        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_assignment_late_red_24dp));
         builder.setContentIntent(p);
 
         Notification n = builder.build();
@@ -222,13 +217,6 @@ public class MainActivity extends AppCompatActivity
         Toast toast = Toast.makeText(this, "Clicou em " + titulo, Toast.LENGTH_SHORT);
         toast.show();
 
-    }
-    //esse método terá q fazer a mesma comparacao de horas entre as tarefas e o sistema, e
-    //após encontrar uma tarefa com a hora igual irá retornar a respectiva tarefa, que será
-    //usado também no BroadCastReceiver, para lançar a notifcação sem precisar o app está aberto.
-    public Tarefa getTarefa(){
-
-        return tarefa;
     }
 
 
