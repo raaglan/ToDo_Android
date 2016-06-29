@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
                 android:textColor="@color/primary"
-                android:hint="Name" />
+                android:hint="Name"
+                android:background="@drawable/group_top"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Email Label -->
@@ -45,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/primary"
-                android:hint="Email" />
+                android:hint="Email"
+                android:background="@drawable/group_top"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -59,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textColor="@color/primary"
-                android:hint="Senha"/>
+                android:hint="Senha"
+                android:background="@drawable/group_top"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->

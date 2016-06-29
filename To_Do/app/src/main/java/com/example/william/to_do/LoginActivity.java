@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        Firebase.setAndroidContext(this);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -75,21 +78,41 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.show();
 
         String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
-
-        // TODO: Implement your own authentication logic here.
-
-
+        final String password = _passwordText.getText().toString();
+        Usuario user = new Usuario();
+        user.setEmail(email);
+        user.setSenha(password);
+        FirebaseUtil fb = new FirebaseUtil();
+        fb.iniciarFirebase();
+        final Usuario userTemp = fb.getUser(user);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+//                        onLoginSuccess();
+//                        onLoginFailed();
+                        Log.e("","nao entrou");
+                        if (userTemp == null){
+                            Log.e("","ainda eh nulo");
+                        }
+
+                        if (userTemp != null){
+                            Log.e("","entrou");
+                            if(userTemp.getSenha().equals(password)){
+                                onLoginSuccess();
+                            } else{
+                                onLoginFailed();
+                            }
+                        } else{
+                            onLoginFailed();
+                        }
                         progressDialog.dismiss();
                     }
                 }, 3000);
+
+
+
     }
 
 
@@ -117,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }
@@ -129,14 +152,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+            _emailText.setError("Insira um email válido");
             valid = false;
         } else {
             _emailText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+            _passwordText.setError("A senha deve conter entre 4 e 10 numeros");
             valid = false;
         } else {
             _passwordText.setError(null);
