@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FragmentToDo"
-    android:id="@+id/todoFragment"
-    android:background="@drawable/backfragtodo">
+    android:id="@+id/todoFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

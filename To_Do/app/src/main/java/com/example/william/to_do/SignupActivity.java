@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -32,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.inject(this);
-
+        Firebase.setAndroidContext(this);
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +70,9 @@ public class SignupActivity extends AppCompatActivity {
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
+        Usuario userTemp = new Usuario(name,email,password);
+        FirebaseUtil fb = new FirebaseUtil();
+        fb.inserirUsuario(userTemp);
 
         // TODO: Implement your own signup logic here.
 
@@ -85,6 +90,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
+
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         Intent it = new Intent(this,LoginActivity.class);

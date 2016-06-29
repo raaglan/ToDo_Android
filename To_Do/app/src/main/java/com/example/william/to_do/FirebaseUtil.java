@@ -69,4 +69,13 @@ public class FirebaseUtil {
 
         firebase.child("task").push().setValue(t);
     }
+
+    public void inserirUsuario(Usuario u) {
+        Log.e("buto","buto usuario nesse krai");
+        if(firebase == null) {
+            iniciarFirebase();
+        }
+
+        firebase.child("user").push().setValue(u);
+    }
 }

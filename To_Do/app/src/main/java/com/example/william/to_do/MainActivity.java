@@ -23,6 +23,8 @@ import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -37,13 +40,12 @@ public class MainActivity extends AppCompatActivity
 
     private boolean viewIsAtHome;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity
 //
 //            }
 //        });
+
 
         //lança a notificação automatica, quando a classe BroadCast nao estiver comentada.
         //Mas terá que ser feita uma comparação com as datas das tarefas cadastradas com a hora do sistema
