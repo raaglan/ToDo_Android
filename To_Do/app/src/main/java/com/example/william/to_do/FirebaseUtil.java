@@ -62,7 +62,7 @@ public class FirebaseUtil {
     }
 
     public void inserirTask(Tarefa t) {
-        Log.e("buto","buto nesse krai");
+
         if(firebase == null) {
             iniciarFirebase();
         }
@@ -71,7 +71,7 @@ public class FirebaseUtil {
     }
 
     public void inserirUsuario(Usuario u) {
-        Log.e("buto","buto usuario nesse krai");
+
         if(firebase == null) {
             iniciarFirebase();
         }
@@ -79,10 +79,9 @@ public class FirebaseUtil {
         firebase.child("user").push().setValue(u);
     }
 
-    public Usuario getUser(Usuario u) {
+    public ArrayList<Usuario> getUsersByEmailAndPassword(Usuario u) {
         final Usuario user = u;
         final ArrayList<Usuario> users = new ArrayList<>();
-        final Boolean[] finalizaAsync = {true};
 
         firebase.child("user").addValueEventListener(new ValueEventListener() {
 
@@ -101,25 +100,24 @@ public class FirebaseUtil {
 
                             if (userTemp.getEmail().equals(user.getEmail()) &&  userTemp.getSenha().equals(user.getSenha())){
                                 users.add(userTemp);
-                                Log.e("etxa",userTemp.toString());
+
                             }
                         }
 
                     }
                 }
-                finalizaAsync[0] = false;
 
             }
 
             @Override
             public void onCancelled(FirebaseError error) {
 
-                Log.e("aeww","n achou");
+
 
             }
         });
 
-        return users.get(0);
+        return users;
 
     }
 }

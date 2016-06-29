@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -84,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         user.setSenha(password);
         FirebaseUtil fb = new FirebaseUtil();
         fb.iniciarFirebase();
-        final Usuario userTemp = fb.getUser(user);
+        final ArrayList<Usuario> users = fb.getUsersByEmailAndPassword(user);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -92,18 +94,15 @@ public class LoginActivity extends AppCompatActivity {
                         // On complete call either onLoginSuccess or onLoginFailed
 //                        onLoginSuccess();
 //                        onLoginFailed();
-                        Log.e("","nao entrou");
-                        if (userTemp == null){
-                            Log.e("","ainda eh nulo");
+
+                        Usuario userTemp = null;
+                        if (users.size()>0){
+                            userTemp = users.get(0);
                         }
 
                         if (userTemp != null){
-                            Log.e("","entrou");
-                            if(userTemp.getSenha().equals(password)){
-                                onLoginSuccess();
-                            } else{
-                                onLoginFailed();
-                            }
+
+                            onLoginSuccess();
                         } else{
                             onLoginFailed();
                         }
