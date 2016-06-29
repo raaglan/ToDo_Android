@@ -78,4 +78,48 @@ public class FirebaseUtil {
 
         firebase.child("user").push().setValue(u);
     }
+
+    public Usuario getUser(Usuario u) {
+        final Usuario user = u;
+        final ArrayList<Usuario> users = new ArrayList<>();
+        final Boolean[] finalizaAsync = {true};
+
+        firebase.child("user").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                sb = new StringBuffer();
+
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+
+                    if (postSnapshot != null) {
+
+                        Usuario userTemp = postSnapshot.getValue(Usuario.class);
+
+                        if (userTemp != null) {
+
+                            if (userTemp.getEmail().equals(user.getEmail()) &&  userTemp.getSenha().equals(user.getSenha())){
+                                users.add(userTemp);
+                                Log.e("etxa",userTemp.toString());
+                            }
+                        }
+
+                    }
+                }
+                finalizaAsync[0] = false;
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+
+                Log.e("aeww","n achou");
+
+            }
+        });
+
+        return users.get(0);
+
+    }
 }

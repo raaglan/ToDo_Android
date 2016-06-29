@@ -77,4 +77,9 @@ public class Usuario implements Parcelable {
         dest.writeString(email);
         dest.writeString(senha);
     }
+
+    @Override
+    public String toString() {
+        return nome + " - "+ senha+" - "+email+" - ";
+    }
 }
