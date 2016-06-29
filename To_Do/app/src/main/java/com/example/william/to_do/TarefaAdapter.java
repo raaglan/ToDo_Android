@@ -37,7 +37,7 @@ public class TarefaAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Tarefa getItem(int position) {
         return lista.get(position);
     }
 

@@ -23,6 +23,7 @@ import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -71,6 +72,21 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//        ListView toDoList = (ListView) findViewById(R.id.lvToDo);
+//        toDoList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Tarefa tarefaClicada = (Tarefa) parent.getAdapter().getItem(position);
+//                Intent it = new Intent(view.getContext(),MostrarTarefaActivity.class);
+//                Bundle dados = new Bundle();
+//                dados.putParcelable("tarefa",tarefaClicada);
+//                it.putExtras(dados);
+//                startActivity(it);
+//            }
+//
+//        });
 
 //        toDoList = (ListView) findViewById(R.id.lvToDo);
 //        toDoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -182,10 +198,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
     }
-
-
-
-
 
     public void gerarNotificacao(Context context, Intent intent, Tarefa t) {
 
