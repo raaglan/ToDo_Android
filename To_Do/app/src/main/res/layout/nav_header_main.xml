@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textSize="11dp"
         android:textStyle="italic"
-        android:text="Organize de forma simples suas atividades diárias"
+        android:text="Organize suas tarefas diárias"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp" />
 
