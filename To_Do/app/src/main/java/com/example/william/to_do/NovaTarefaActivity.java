@@ -1,9 +1,9 @@
 package com.example.william.to_do;
 
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,13 +19,16 @@ import android.widget.TextView;
     private TextView tvData;
     private Button btnOk;
     final Tarefa tarefa = new Tarefa();
+    private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_tarefa);
 
-
+        mToolbar = (Toolbar)findViewById(R.id.toolbar);
+        mToolbar.setTitle("Nova Tarefa");
 
         edtTitulo = (TextView) findViewById(R.id.editTitulo);
         edtTitulo.setOnClickListener(new View.OnClickListener() {
