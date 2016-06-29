@@ -17,8 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="false"
-        android:onClick="displayView">
+        android:layout_alignParentEnd="false">
 
         <ImageView
             android:layout_width="wrap_content"
