@@ -40,6 +40,10 @@ public class FragmentToDo extends Fragment {
         toDoList.setAdapter(tarefaAdapter);
         tarefaAdapter.notifyDataSetChanged();
 
+
+
+
+
         return view;
     }
 

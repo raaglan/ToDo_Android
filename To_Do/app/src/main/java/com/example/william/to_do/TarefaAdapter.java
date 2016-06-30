@@ -1,6 +1,8 @@
 package com.example.william.to_do;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -50,7 +52,7 @@ public class TarefaAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final ItemSuporte itemHolder;
-        Tarefa tarefa = lista.get(position);
+        final Tarefa tarefa = lista.get(position);
 
         if(convertView == null){
 
@@ -105,6 +107,19 @@ public class TarefaAdapter extends BaseAdapter {
                 return true;
             }
         });
+
+       itemHolder.container.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View v, MotionEvent event) {
+               Intent it = new Intent(v.getContext(),MostrarTarefaActivity.class);
+               Bundle dados = new Bundle();
+               String titulo = tarefa.getTitulo();
+               dados.putString("titulo",titulo);
+               it.putExtras(dados);
+               context.startActivity(it);
+               return false;
+           }
+       });
         return convertView;
     }
 
