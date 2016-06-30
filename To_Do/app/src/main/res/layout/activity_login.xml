@@ -58,6 +58,7 @@
                 android:background="@drawable/group_top"/>
         </android.support.design.widget.TextInputLayout>
 
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
@@ -67,6 +68,22 @@
             android:padding="12dp"
             android:text="Entrar"/>
 
+        <TextView
+            android:id="@+id/status_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"
+            android:id="@+id/signOutButton"/>
+
+
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -75,7 +92,9 @@
             android:textStyle="bold"
             android:text="Não possui uma conta? Clique aqui"
             android:gravity="center"
-            android:textSize="16dip"/>
+            android:textSize="16dp"
+            android:layout_marginTop="100dp" />
+
 
     </LinearLayout>
 </ScrollView>
