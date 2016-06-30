@@ -123,9 +123,18 @@ public class TarefaAdapter extends BaseAdapter {
             public boolean onLongClick(View v) {
                 Intent it = new Intent(v.getContext(),MostrarTarefaActivity.class);
                 Bundle dados = new Bundle();
-               String titulo = tarefa.getTitulo();
-               dados.putString("titulo",titulo);
-               it.putExtras(dados);
+                //pegando os dados
+                String titulo = tarefa.getTitulo();
+                String descricao = tarefa.getDescricao();
+                String hora = tarefa.getHora();
+                String data = tarefa.getData();
+                //passando os dados para a tela MostrarTarefa
+                dados.putString("titulo",titulo);
+                dados.putString("descricao", descricao);
+                dados.putString("hora", hora);
+                dados.putString("data", data);
+
+                it.putExtras(dados);
                 context.startActivity(it);
                 return false;
             }
@@ -146,9 +155,4 @@ public class TarefaAdapter extends BaseAdapter {
         ImageButton btnDone;
         ImageButton btnDelete;
     }
-
-
-
-
-
 }
