@@ -21,14 +21,9 @@ public class MostrarTarefaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_tarefa);
-//            ButterKnife.inject(this);
-//        Bundle dados = getIntent().getExtras();
-//        Tarefa tarefa = dados.getParcelable("tarefa");
-//        nomeNota.setText(tarefa.getTitulo());
-
+        Bundle dados = getIntent().getExtras();
         nomeNota = (TextView) findViewById(R.id.nomenota);
-        Intent it = new Intent();
-        String titulo = it.getStringExtra("titulo");
+        String titulo = dados.getString("titulo");
         nomeNota.setText(titulo);
     }
 

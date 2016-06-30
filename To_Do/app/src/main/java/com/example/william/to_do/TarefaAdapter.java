@@ -104,22 +104,32 @@ public class TarefaAdapter extends BaseAdapter {
             public boolean onTouch(View v, MotionEvent event) {
                 itemHolder.mDetector.onTouchEvent(event);
 
-                return true;
+                return false;
             }
         });
+//
+//       itemHolder.container.setOnTouchListener(new View.OnTouchListener() {
+//           @Override
+//           public boolean onTouch(View v, MotionEvent event) {
+//
+//
+//
+//               return false;
+//           }
+//       });
 
-       itemHolder.container.setOnTouchListener(new View.OnTouchListener() {
-           @Override
-           public boolean onTouch(View v, MotionEvent event) {
-               Intent it = new Intent(v.getContext(),MostrarTarefaActivity.class);
-               Bundle dados = new Bundle();
+        itemHolder.container.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent it = new Intent(v.getContext(),MostrarTarefaActivity.class);
+                Bundle dados = new Bundle();
                String titulo = tarefa.getTitulo();
                dados.putString("titulo",titulo);
                it.putExtras(dados);
-               context.startActivity(it);
-               return false;
-           }
-       });
+                context.startActivity(it);
+                return false;
+            }
+        });
         return convertView;
     }
 
