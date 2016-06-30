@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.style.BulletSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
@@ -26,7 +27,6 @@ public class MostrarTarefaActivity extends AppCompatActivity {
 //        nomeNota.setText(tarefa.getTitulo());
 
         nomeNota = (TextView) findViewById(R.id.nomenota);
-
         Intent it = new Intent();
         String titulo = it.getStringExtra("titulo");
         nomeNota.setText(titulo);
