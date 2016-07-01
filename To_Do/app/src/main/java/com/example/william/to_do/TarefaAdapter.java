@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,11 +70,18 @@ public class TarefaAdapter extends BaseAdapter {
             itemHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    FirebaseUtil fb = new FirebaseUtil();
+//                    Tarefa t = new Tarefa();
                     itemHolder.btnDelete.setImageResource(R.drawable.btn_delete);
                     Toast t = Toast.makeText(context, "Click Delete", Toast.LENGTH_SHORT);
                     t.show();
+
+
+
+
                 }
             });
+
 
             itemHolder.btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override

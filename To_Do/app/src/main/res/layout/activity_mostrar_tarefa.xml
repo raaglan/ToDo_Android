@@ -6,62 +6,74 @@
     tools:context="com.example.william.to_do.MostrarTarefaActivity"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:title="@string/app_name"
-        android:titleTextColor="@color/white"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:padding="10dp"
-        android:text="Texto Nota"
-        android:id="@+id/nomenota"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:title="@string/app_name"
+            android:titleTextColor="@color/white"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:padding="10dp"
-        android:text="Texto Descricao"
-        android:id="@+id/nomedescricao"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"/>
+        </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="78dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:padding="10dp"
+            android:text="Texto Nota"
+            android:id="@+id/nomenota"
+            android:editable="true"
+            android:focusableInTouchMode="true"
+            style="@android:style/Theme.Black"
+            android:layout_below="@+id/toolbar"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:padding="10dp"
+            android:text="Texto Descricao"
+            android:editable="true"
+            android:singleLine="true"
+            android:inputType="text"
+            android:focusable="true"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/nomedescricao"
+            android:layout_below="@+id/nomenota"
+            android:textStyle="italic"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:padding="10dp"
             android:text="Hora"
             android:id="@+id/tvhora2"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="5dp" />
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:padding="10dp"
             android:text="Data"
             android:id="@+id/tvdata2"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="15dp" />
-    </LinearLayout>
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/tvhora2" />
+    </RelativeLayout>
+
 
 </LinearLayout>

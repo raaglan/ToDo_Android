@@ -25,6 +25,7 @@ public class FirebaseUtil {
     private Firebase firebase;
     private StringBuffer sb;
 
+
     public void iniciarFirebase() {
         // Create a connection to your Firebase database
         firebase = new Firebase(FIREBASE_URL);
@@ -52,6 +53,7 @@ public class FirebaseUtil {
                         if (tarefa != null) {
                             lista.add(tarefa);
                         }
+
                     }
                 }
             }
@@ -72,6 +74,13 @@ public class FirebaseUtil {
 
         firebase.child("task").push().setValue(t);
     }
+//    public void removerTask(Tarefa t){
+//
+//        if(firebase == null){
+//            iniciarFirebase();
+//        }
+//        //codigo pra deletar
+//    }
 
     public void inserirUsuario(Usuario u) {
 

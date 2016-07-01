@@ -87,13 +87,12 @@
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:textColor="@color/primary"
             android:textStyle="bold"
             android:text="Não possui uma conta? Clique aqui"
             android:gravity="center"
             android:textSize="16dp"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="12dp" />
 
 
     </LinearLayout>
