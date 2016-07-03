@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,10 +42,12 @@ public class MainActivity extends AppCompatActivity
 
     private boolean viewIsAtHome;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -156,20 +159,28 @@ public class MainActivity extends AppCompatActivity
 
         switch (viewId) {
             case R.id.nav_todo:
+                Log.e("aaaaaaaaaaaaaaaaaaaa","UI");
                 fragment = new FragmentToDo();
                 FirebaseUtil fb = new FirebaseUtil();
                 fb.iniciarFirebase();
-                ArrayList<Tarefa> minhasTarefas = fb.obterListagemTarefas();
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("listaTarefas", minhasTarefas);
+                bundle.putParcelableArrayList("listaTarefas", fb.obterListagemTarefas());
+                Log.e("aaaaaaaaaaaaaaaaaaaa",""+fb.obterListagemTarefas());
                 fragment.setArguments(bundle);
                 title  = "To Do";
                 viewIsAtHome = true;
                 break;
             case R.id.nav_done:
+                Log.e("aaaaaaaaaaaaaaaaaaaa","UI DONEEEE");
                 fragment = new FragmentDone();
-                title = "Done";
-                viewIsAtHome = false;
+                FirebaseUtil fb2 = new FirebaseUtil();
+                fb2.iniciarFirebase();
+                Bundle bundle2 = new Bundle();
+                bundle2.putParcelableArrayList("listaDone", fb2.obterListagemTarefasRealizadas());
+                Log.e("DOOOONEEEEE",""+fb2.obterListagemTarefasRealizadas());
+                fragment.setArguments(bundle2);
+                title  = "Done";
+                viewIsAtHome = true;
                 break;
             case R.id.nav_logout:
                 viewIsAtHome = false;

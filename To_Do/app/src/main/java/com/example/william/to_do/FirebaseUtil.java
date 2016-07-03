@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
@@ -25,16 +26,13 @@ public class FirebaseUtil {
     private Firebase firebase;
     private StringBuffer sb;
 
-
     public void iniciarFirebase() {
         // Create a connection to your Firebase database
         firebase = new Firebase(FIREBASE_URL);
     }
 
     public ArrayList<Tarefa> obterListagemTarefas() {
-
-        final ArrayList<Tarefa> lista = new ArrayList<Tarefa>();
-
+        final ArrayList<Tarefa> lista = new ArrayList<>();
         // FIREBASE
         // Listen for realtime changes
         firebase.child("task").addValueEventListener(new ValueEventListener() {
@@ -49,6 +47,7 @@ public class FirebaseUtil {
                     if (postSnapshot != null) {
 
                         Tarefa tarefa = postSnapshot.getValue(Tarefa.class);
+                        tarefa.setKey(postSnapshot.getKey());
 
                         if (tarefa != null) {
                             lista.add(tarefa);
@@ -66,6 +65,40 @@ public class FirebaseUtil {
         return lista;
     }
 
+    public ArrayList<Tarefa> obterListagemTarefasRealizadas() {
+        final ArrayList<Tarefa> listaDone = new ArrayList<>();
+        // FIREBASE
+        // Listen for realtime changes
+        firebase.child("taskDone").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                sb = new StringBuffer();
+
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+
+                    if (postSnapshot != null) {
+
+                        Tarefa tarefa = postSnapshot.getValue(Tarefa.class);
+                        tarefa.setKey(postSnapshot.getKey());
+
+                        if (tarefa != null) {
+                            listaDone.add(tarefa);
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+            }
+        });
+
+        return listaDone;
+    }
+
     public void inserirTask(Tarefa t) {
 
         if(firebase == null) {
@@ -73,14 +106,27 @@ public class FirebaseUtil {
         }
 
         firebase.child("task").push().setValue(t);
+//        notifyDataSetChanged();
     }
-//    public void removerTask(Tarefa t){
-//
-//        if(firebase == null){
-//            iniciarFirebase();
-//        }
-//        //codigo pra deletar
-//    }
+    public void inserirTaskRealizada(Tarefa t){
+
+        if(firebase == null) {
+            iniciarFirebase();
+        }
+
+        firebase.child("taskDone").push().setValue(t);
+    }
+
+    public void removerTask(String key){
+
+        if(firebase == null) {
+            iniciarFirebase();
+        }
+        Log.e("String", key);
+        firebase.child("task/"+key).removeValue();
+    }
+
+
 
     public void inserirUsuario(Usuario u) {
 
@@ -89,6 +135,15 @@ public class FirebaseUtil {
         }
 
         firebase.child("user").push().setValue(u);
+    }
+
+    public void onChildRemoved(ArrayList<Tarefa> lista, String key){
+        for (Tarefa t : lista){
+            if (t.getKey().equals(key)){
+                lista.remove(t);
+                break;
+            }
+        }
     }
 
     public ArrayList<Usuario> getUsersByEmailAndPassword(Usuario u) {

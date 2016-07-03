@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
+import android.system.OsConstants;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+
 import java.util.ArrayList;
 
 /**
@@ -25,6 +29,7 @@ public class TarefaAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
     private ArrayList<Tarefa> lista;
+
 
 
 
@@ -50,7 +55,7 @@ public class TarefaAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ItemSuporte itemHolder;
         final Tarefa tarefa = lista.get(position);
@@ -66,19 +71,16 @@ public class TarefaAdapter extends BaseAdapter {
             itemHolder.container = (RelativeLayout) convertView.findViewById(R.id.container);
             itemHolder.btnDone = (ImageButton) convertView.findViewById(R.id.btnDone);
             itemHolder.btnDelete = (ImageButton) convertView.findViewById(R.id.btnDelete);
-
             itemHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    FirebaseUtil fb = new FirebaseUtil();
-//                    Tarefa t = new Tarefa();
+                    FirebaseUtil fb = new FirebaseUtil();
                     itemHolder.btnDelete.setImageResource(R.drawable.btn_delete);
-                    Toast t = Toast.makeText(context, "Click Delete", Toast.LENGTH_SHORT);
+                    Toast t = Toast.makeText(context, "Tarefa deletada", Toast.LENGTH_SHORT);
                     t.show();
-
-
-
-
+                    fb.removerTask(tarefa.getKey());
+                    fb.onChildRemoved(lista, tarefa.getKey());
+                    notifyDataSetChanged();
                 }
             });
 
@@ -86,10 +88,18 @@ public class TarefaAdapter extends BaseAdapter {
             itemHolder.btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.e("aaaaaaaaaaaaa","porraaaaaaaaaaaaa");
+                    FirebaseUtil fb = new FirebaseUtil();
                     itemHolder.btnDone.setImageResource(R.drawable.btn_done);
-                    Toast t = Toast.makeText(context, "Click Done", Toast.LENGTH_SHORT);
+                    Toast t = Toast.makeText(context, "Tarefa concluída", Toast.LENGTH_SHORT);
                     t.show();
+                    fb.removerTask(tarefa.getKey());
+                    fb.onChildRemoved(lista, tarefa.getKey());
+                    notifyDataSetChanged();
+                    // A TAREFA FOI REMOVIDA FALTA ADD ELA NA LISTA DE DONE
+                    fb.inserirTaskRealizada(tarefa);
                 }
+
             });
 
             itemHolder.mDetector = new GestureDetectorCompat(context,
@@ -149,6 +159,8 @@ public class TarefaAdapter extends BaseAdapter {
         });
         return convertView;
     }
+
+
 
     public ArrayList<Tarefa> getList(){
         return lista;

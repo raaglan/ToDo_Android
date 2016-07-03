@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.william.to_do.FragmentDone"
     android:id="@+id/doneFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <ListView
         android:id="@+id/lvDone"

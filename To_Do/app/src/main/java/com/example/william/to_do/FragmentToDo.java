@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 /**
  * Created by cragl on 04/06/2016.
@@ -17,6 +18,7 @@ public class FragmentToDo extends Fragment {
     private ArrayList<Tarefa> minhasTarefas = new ArrayList<>();
     private TarefaAdapter tarefaAdapter;
     private ListView toDoList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

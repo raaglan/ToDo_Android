@@ -11,6 +11,7 @@ import java.util.Timer;
  */
 public class Tarefa implements Parcelable {
 
+    private String key;
     private String titulo;
     private String descricao;
     private String data;
@@ -38,6 +39,14 @@ public class Tarefa implements Parcelable {
             return new Tarefa[size];
         }
     };
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -82,5 +91,16 @@ public class Tarefa implements Parcelable {
         dest.writeString(descricao);
         dest.writeString(data);
         dest.writeString(hora);
+    }
+
+    @Override
+    public String toString() {
+        return "Tarefa{" +
+                "titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", data='" + data + '\'' +
+                ", hora='" + hora + '\'' +
+                ", key='" + key + '\'' +
+                '}';
     }
 }

@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Usuário ou senha incorretos (FALTA IMPLEMENTAR A LOGICA DE LOGIN ESSA PORRA SO PEGA QUANDO QUER)", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }
@@ -194,7 +194,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
             _passwordText.setError("A senha deve conter entre 4 e 10 numeros");
             valid = false;
-        } else {
+        }
+
+
+        else {
             _passwordText.setError(null);
         }
 
