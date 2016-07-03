@@ -80,6 +80,7 @@ public class TarefaAdapter extends BaseAdapter {
                     t.show();
                     fb.removerTask(tarefa.getKey());
                     fb.onChildRemoved(lista, tarefa.getKey());
+                    fb.removerTaskDone(tarefa.getKey());
                     notifyDataSetChanged();
                 }
             });

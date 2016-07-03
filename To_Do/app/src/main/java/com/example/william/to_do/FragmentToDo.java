@@ -37,5 +37,3 @@ public class FragmentToDo extends Fragment {
         return view;
     }
 }
-
-

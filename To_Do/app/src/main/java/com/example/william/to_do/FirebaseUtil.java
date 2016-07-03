@@ -99,6 +99,30 @@ public class FirebaseUtil {
         return listaDone;
     }
 
+    //-------------------------------------------------------------
+
+//    public ArrayList<String> tarefas istagemTarefasR34ealizadas() {
+//        final ArrayList<Tarefa> listaDone = new ArrayList<>();
+//        // FIREBASE
+//        // Listen for realtime changes
+//        firebase.child("taskDone").addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//
+//                sb = new StringBuffer();
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError error) {
+//            }
+//        });
+//
+//    }
+    //---------------------------------------------------------------------------------------
+
     public void inserirTask(Tarefa t) {
 
         if(firebase == null) {
@@ -124,6 +148,15 @@ public class FirebaseUtil {
         }
         Log.e("String", key);
         firebase.child("task/"+key).removeValue();
+    }
+
+    public void removerTaskDone(String key){
+
+        if(firebase == null) {
+            iniciarFirebase();
+        }
+        Log.e("String", key);
+        firebase.child("taskDone/"+key).removeValue();
     }
 
 
