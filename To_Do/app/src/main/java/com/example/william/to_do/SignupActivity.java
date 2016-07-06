@@ -29,6 +29,8 @@ public class SignupActivity extends AppCompatActivity {
     @InjectView(R.id.btn_signup) Button _signupButton;
     @InjectView(R.id.link_login) TextView _loginLink;
 
+    public Usuario userTemp;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,14 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
+    public Usuario getUserTemp() {
+        return userTemp;
+    }
+
+    public void setUserTemp(Usuario userTemp) {
+        this.userTemp = userTemp;
+    }
+
     public void signup() {
         Log.d(TAG, "Signup");
 
@@ -70,8 +80,11 @@ public class SignupActivity extends AppCompatActivity {
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
-        Usuario userTemp = new Usuario(name,email,password);
+        userTemp = new Usuario(name,email,password);
         FirebaseUtil fb = new FirebaseUtil();
+
+        Log.e("USUARIO","USUARIO = "+userTemp);
+
         fb.inserirUsuario(userTemp);
 
         // TODO: Implement your own signup logic here.
@@ -92,6 +105,7 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
 
         _signupButton.setEnabled(true);
+        Log.e("aloha","iaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaae"+userTemp.getEmail());
         setResult(RESULT_OK, null);
         Intent it = new Intent(this,LoginActivity.class);
         startActivity(it);
@@ -99,11 +113,13 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
+
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Seu login falhou", Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }
+
 
     public boolean validate() {
         boolean valid = true;
@@ -135,4 +151,5 @@ public class SignupActivity extends AppCompatActivity {
 
         return valid;
     }
+
 }

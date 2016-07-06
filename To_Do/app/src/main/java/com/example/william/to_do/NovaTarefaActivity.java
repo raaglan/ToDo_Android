@@ -4,14 +4,20 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import com.example.william.to_do.SignupActivity;
+import com.example.william.to_do.Usuario;
+
+import butterknife.InjectView;
 
 /**
  * Created by willi on 25/05/2016.
  */
-    public class NovaTarefaActivity extends AppCompatActivity {
+    public class NovaTarefaActivity extends AppCompatActivity  {
 
     private TextView edtTitulo;
     private TextView edtDescricao;
@@ -19,12 +25,11 @@ import android.widget.TextView;
     private TextView tvData;
     private Button btnOk;
     final Tarefa tarefa = new Tarefa();
-    
     private Toolbar mToolbar;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_tarefa);
 
@@ -54,9 +59,10 @@ import android.widget.TextView;
             @Override
             public void onClick(View v) {
 
+
+
                 FirebaseUtil fb = new FirebaseUtil();
                 Tarefa t = new Tarefa();
-
                 String titulo = edtTitulo.getText().toString();
                 String descricao = edtDescricao.getText().toString();
                 String hora = tvHora.getText().toString();
@@ -67,8 +73,12 @@ import android.widget.TextView;
                 t.setHora(hora);
                 t.setData(data);
 
+//                //VER QUAL USUARIO TA LOGADO
+
                 fb.inserirTask(t);
                 finish();
+
+
             }
         });
 

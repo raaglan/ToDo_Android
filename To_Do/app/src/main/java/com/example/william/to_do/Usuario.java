@@ -29,6 +29,9 @@ public class Usuario implements Parcelable {
         senha = in.readString();
     }
 
+    public Usuario(String s) {
+    }
+
     public String getNome() {
         return nome;
     }
