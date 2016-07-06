@@ -3,6 +3,7 @@ package com.example.william.to_do;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
 import android.widget.TextView;
 
 import butterknife.InjectView;
@@ -14,6 +15,9 @@ public class MostrarTarefaActivity extends AppCompatActivity {
     TextView nomeDescricao;
     TextView tvHora;
     TextView tvData;
+    Button buttonApagar;
+    Tarefa tarefa = new Tarefa();
+
 
     private Toolbar mToolbar;
 
@@ -42,6 +46,15 @@ public class MostrarTarefaActivity extends AppCompatActivity {
         tvData = (TextView) findViewById(R.id.tvdata2);
         String tvdata2 = dados.getString("data");
         tvData.setText(tvdata2);
+
+//        FirebaseUtil fb = new FirebaseUtil();
+//        buttonApagar.setImageResource(R.drawable.);
+//        Toast t = Toast.makeText(context, "Tarefa deletada", Toast.LENGTH_SHORT);
+//        t.show();
+//        fb.removerTask(tarefa.getKey());
+//        fb.onChildRemoved(lista, tarefa.getKey());
+//        fb.removerTaskDone(tarefa.getKey());
+//        notifyDataSetChanged();
 
 
     }
