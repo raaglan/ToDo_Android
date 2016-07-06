@@ -32,6 +32,7 @@ public class TarefaAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
     }
 
+
     @Override
     public int getCount() {
         return lista.size();
@@ -153,8 +154,6 @@ public class TarefaAdapter extends BaseAdapter {
         });
         return convertView;
     }
-
-
 
     public ArrayList<Tarefa> getList(){
         return lista;
