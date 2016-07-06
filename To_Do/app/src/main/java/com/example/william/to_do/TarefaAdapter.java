@@ -4,20 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
-import android.system.OsConstants;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.firebase.client.DataSnapshot;
 
 import java.util.ArrayList;
 
@@ -30,14 +26,12 @@ public class TarefaAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Tarefa> lista;
 
-
-
-
     public TarefaAdapter(Context context,ArrayList<Tarefa> tarefas){
         this.context = context;
         this.lista = tarefas;
         mInflater = LayoutInflater.from(context);
     }
+
 
     @Override
     public int getCount() {
@@ -160,8 +154,6 @@ public class TarefaAdapter extends BaseAdapter {
         });
         return convertView;
     }
-
-
 
     public ArrayList<Tarefa> getList(){
         return lista;

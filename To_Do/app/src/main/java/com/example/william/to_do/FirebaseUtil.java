@@ -1,22 +1,13 @@
 package com.example.william.to_do;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static com.firebase.client.Firebase.*;
 
 public class FirebaseUtil {
 
@@ -136,6 +127,15 @@ public class FirebaseUtil {
         Log.e("String", key);
         firebase.child("taskDone/"+key).removeValue();
     }
+
+//    public void removeTaskView(String key){
+//
+//        if(firebase == null) {
+//            iniciarFirebase();
+//        }
+//        Log.e("String", key);
+//        firebase.child("taskDone/"+key).removeValue();
+//    }
 
 
 
