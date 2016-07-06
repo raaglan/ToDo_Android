@@ -27,7 +27,7 @@ public class MostrarTarefaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mostrar_tarefa);
 
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
-        mToolbar.setTitle("Tarefas");
+        mToolbar.setTitle("Tarefa");
 
         Bundle dados = getIntent().getExtras();
 

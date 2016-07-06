@@ -11,6 +11,8 @@ import java.util.Timer;
  */
 public class Tarefa implements Parcelable {
 
+
+    private String owner;
     private String key;
     private String titulo;
     private String descricao;
@@ -22,6 +24,7 @@ public class Tarefa implements Parcelable {
     }
 
     protected Tarefa(Parcel in) {
+        owner = in.readString();
         titulo = in.readString();
         descricao = in.readString();
         data = in.readString();
@@ -46,6 +49,14 @@ public class Tarefa implements Parcelable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String key) {
+        this.owner = owner;
     }
 
     public String getTitulo() {
@@ -87,6 +98,7 @@ public class Tarefa implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(owner);
         dest.writeString(titulo);
         dest.writeString(descricao);
         dest.writeString(data);

@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/header">
+    android:background="@drawable/backabout2"
+    android:fillViewport="false">
 
     <LinearLayout
         android:orientation="vertical"
@@ -83,7 +84,8 @@
             android:textStyle="bold"
             android:text="Já possui conta? Clique aqui"
             android:gravity="center"
-            android:textSize="16dip"/>
+            android:textSize="16dip"
+            android:layout_marginTop="120dp" />
 
     </LinearLayout>
 </ScrollView>

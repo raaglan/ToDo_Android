@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,11 +37,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import butterknife.InjectView;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
 
     private boolean viewIsAtHome;
+
 
 
     @Override
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         Firebase.setAndroidContext(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -164,6 +169,7 @@ public class MainActivity extends AppCompatActivity
                 FirebaseUtil fb = new FirebaseUtil();
                 fb.iniciarFirebase();
                 Bundle bundle = new Bundle();
+                //NA HORA QUE FOR LISTAR VERIFICANDO SE O OWNER É QUEM ESTA LOGADO
                 bundle.putParcelableArrayList("listaTarefas", fb.obterListagemTarefas());
                 Log.e("aaaaaaaaaaaaaaaaaaaa",""+fb.obterListagemTarefas());
                 fragment.setArguments(bundle);
@@ -244,6 +250,8 @@ public class MainActivity extends AppCompatActivity
         toast.show();
 
     }
+
+
 
 
 
